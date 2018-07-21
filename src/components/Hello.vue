@@ -1,8 +1,8 @@
 <template>
     <div id="app">
-        <h1>Ore Reserves: {{ ore }}</h1>
+        <h1>Ticks: {{ ticks }}</h1>
         <br>
-        <button v-on:click="mineOre">Mine Ore</button>
+        <button v-on:click="tickClock">Tick Clock</button>
     </div>
 </template>
 
@@ -11,13 +11,16 @@ export default {
   name: 'hello',
   data () {
     return {
-      ore: 0
+      ticks: 0
     }
   },
   methods: {
-    mineOre: function () {
-      this.ore++
+    tickClock: function () {
+      this.ticks++
     }
+  },
+  mounted () {
+    setInterval(this.tickClock, 1000)
   }
 }
 </script>
