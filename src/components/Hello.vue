@@ -1,6 +1,7 @@
 <template>
     <div id="app">
-        <h1>Ticks: {{ ticks }}</h1>
+        <h1>{{minutes}} minutes and {{ seconds }} seconds</h1>
+        <p>ticks : {{ticks}}</p>
         <br>
         <button v-on:click="tickClock">Tick Clock</button>
     </div>
@@ -11,12 +12,20 @@ export default {
   name: 'hello',
   data () {
     return {
-      ticks: 0
+      ticks: 55,
+      seconds: 55,
+      minutes: 0
     }
   },
   methods: {
     tickClock: function () {
       this.ticks++
+      if (this.seconds < 60) {
+        this.seconds++
+      } else {
+        this.seconds = 1
+        this.minutes++
+      }
     }
   },
   mounted () {
