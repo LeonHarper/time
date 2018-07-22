@@ -8,10 +8,12 @@
         <button v-on:click="sleepNight">Sleep</button>
         <br>
         <button v-on:click="play">Play</button>
+        <TextOutput></TextOutput>
     </div>
 </template>
 
 <script>
+import TextOutput from './TextOutput'
 export default {
   name: 'hello',
   data () {
@@ -33,18 +35,27 @@ export default {
       this.minutes = Math.floor(this.ticks / 60) % 60
       this.hours = Math.floor(Math.floor(this.ticks / 60) / 60) % 24
       this.days = Math.floor(Math.floor(Math.floor(this.ticks / 60) / 60) / 24)
-      this.energy = this.energy - 1
-      this.happiness = this.happiness - 1
+      this.spendHappiness(1)
+      this.spendEnergy(1)
+    },
+    spendEnergy: function (quantity) {
+      this.energy = this.energy - quantity
+    },
+    spendHappiness: function (quantity) {
+      this.happiness = this.happiness - quantity
     },
     sleepNight: function () {
       this.ticks = this.ticks + 28800
-      this.energy = this.energy + 57600
+      this.energy = this.energy = 57600
     },
     play: function () {
       this.ticks = this.ticks + 7200
       this.energy = this.energy - 7200
       this.happiness = this.happiness + 10
     }
+  },
+  components: {
+    TextOutput
   },
   mounted () {
     setInterval(this.tickClock, 1000)
